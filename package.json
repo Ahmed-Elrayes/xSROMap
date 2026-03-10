@@ -21,7 +21,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ahmed-Elrayes/xSROMap.git"
+    "url": "https://github.com/Ahmed-Elrayes/xSROMap.git"
+  },
+  "homepage": "https://github.com/Ahmed-Elrayes/xSROMap",
+  "bugs": {
+    "url": "https://github.com/Ahmed-Elrayes/xSROMap/issues"
   },
   "keywords": [
     "silkroad",
@@ -31,24 +35,28 @@
     "leaflet",
     "game-map"
   ],
-  "homepage": "https://github.com/Ahmed-Elrayes/xSROMap",
-  "bugs": {
-    "url": "https://github.com/Ahmed-Elrayes/xSROMap/issues"
-  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "prepublishOnly": "npm run build"
+    "test": "echo 'No tests specified'",
+    "release": "semantic-release"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "peerDependencies": {
     "leaflet": "^1.7.0"
   },
   "devDependencies": {
     "leaflet": "^1.9.4",
-    "vite": "^5.0.0"
+    "vite": "^5.0.0",
+    "semantic-release": "^23.0.0",
+    "@semantic-release/npm": "^11.0.0",
+    "@semantic-release/git": "^10.0.0",
+    "@semantic-release/github": "^9.0.0",
+    "@semantic-release/commit-analyzer": "^11.0.0",
+    "@semantic-release/release-notes-generator": "^12.0.0"
   }
 }

@@ -1,52 +1,42 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - 'v*'
+push:
+branches:
+  - main
 
 jobs:
-  release:
-    runs-on: ubuntu-latest
-    
-    permissions:
-      contents: write
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+release:
+runs-on: ubuntu-24.04
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
 
-      - name: Install dependencies
-        run: npm ci
+steps:
+  - name: Checkout
+    uses: actions/checkout@v4
+    with:
+      fetch-depth: 0
 
-      - name: Build package
-        run: npm run build
+  - name: Setup Node
+    uses: actions/setup-node@v4
+    with:
+      node-version: 24
+      registry-url: https://registry.npmjs.org
 
-      - name: Extract version from tag
-        id: get_version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+  - name: Install dependencies
+    run: npm ci
 
-      - name: Create tarball
-        run: npm pack
+  - name: Build
+    run: npm run build --if-present
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: xsromap-*.tgz
-          generate_release_notes: true
-          body: |
-            ## Install from npm
-            ```bash
-            npm install xsromap@${{ steps.get_version.outputs.VERSION }}
-            ```
-            
-            ## Manual publish reminder
-            After creating this release, publish to npm:
-            ```bash
-            npm publish --access public
-            ```
+  - name: Test
+    run: npm test --if-present
+
+  - name: Release
+    run: npx semantic-release
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
