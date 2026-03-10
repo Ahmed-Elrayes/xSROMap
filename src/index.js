@@ -171,7 +171,7 @@ export function createXSROMap(elementId, options = {}) {
     ]);
 
     mapLayer = new SRLayer(imgHost + '{z}/{x}x{y}.jpg', {
-      attribution: '<a href="#">World Map</a>'
+      attribution: '<a href="https://jellybitz.github.io/xSROMap/" title="The easy way to explore the Silkroad Online world map"><i class="fa fa-dragon"></i> xSROMap</a>'
     });
     mappingLayers[''] = mapLayer;
 
@@ -793,14 +793,14 @@ export function createXSROMap(elementId, options = {}) {
       const coord = fixCoords(x, y, z, region);
       toClipboard(
         window.location.href.split(/\?|#/)[0] +
-          '?x=' +
-          coord.x +
-          '&y=' +
-          coord.y +
-          '&z=' +
-          coord.z +
-          '&region=' +
-          coord.region
+        '?x=' +
+        coord.x +
+        '&y=' +
+        coord.y +
+        '&z=' +
+        coord.z +
+        '&region=' +
+        coord.region
       );
     },
 
