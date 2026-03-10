@@ -1,25 +1,29 @@
 module.exports = {
-    branches: ["main"],
+    branches: ['production'],
     tagFormat: "v${version}",
+    repositoryUrl: 'https://github.com/Ahmed-Elrayes/xSROMap.git',
     plugins: [
-        "@semantic-release/commit-analyzer",
-        "@semantic-release/release-notes-generator",
-
         [
-            "@semantic-release/npm",
+            '@semantic-release/commit-analyzer',
             {
-                npmPublish: true
-            }
+                preset: 'angular', // Conventional commits
+            },
         ],
-
         [
-            "@semantic-release/git",
+            '@semantic-release/release-notes-generator',
             {
-                assets: ["package.json", "package-lock.json"],
-                message: "chore(release): ${nextRelease.version} [skip ci]"
-            }
+                preset: 'angular',
+            },
         ],
-
-        "@semantic-release/github"
-    ]
+        '@semantic-release/changelog',
+        '@semantic-release/npm',
+        [
+            '@semantic-release/git',
+            {
+                assets: ['package.json', 'package-lock.json', 'CHANGELOG.md'],
+                message: 'chore(release): ${nextRelease.version} [skip ci]',
+            },
+        ],
+        '@semantic-release/github',
+    ],
 };
