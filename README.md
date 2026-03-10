@@ -1,6 +1,202 @@
 # xSROMap
 The easy way to explore the [**Silkroad Online**](http://www.joymax.com/silkroad/) world map.
 
+## Installation
+
+### NPM (ES6/Vite/Modern Bundlers)
+
+```bash
+npm install xsromap
+```
+
+### CDN (Browser)
+
+```html
+<!-- Leaflet (required) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- xSROMap -->
+<script src="https://unpkg.com/xsromap/dist/xsromap.umd.cjs"></script>
+```
+
+## Usage
+
+### ES6 Module (Vite, Webpack, etc.)
+
+```javascript
+import { createXSROMap, CoordinateUtils } from 'xsromap';
+import 'leaflet/dist/leaflet.css';
+
+// Create map instance
+const map = createXSROMap('map', {
+  imgHost: '/path/to/minimap/tiles/',
+  initialX: 114,
+  initialY: 47.25
+});
+
+// Navigate to a location
+map.FlyView(6434, 1044); // Jangan
+
+// Add markers
+map.AddNPC('npc1', '<b>Blacksmith</b>', 6500, 1100);
+map.AddPlayer('player1', '<b>JellyBitz</b>', 116.75, 117);
+
+// Use coordinate utilities
+const sroCoord = CoordinateUtils.gameToSRO(6434, 1044);
+console.log(sroCoord); // { x, y, z, region, posX, posY }
+```
+
+### Browser (UMD)
+
+```html
+<div id="map" style="width: 100%; height: 100vh;"></div>
+
+<script>
+  // xSROMap is available globally
+  const map = xSROMap.createXSROMap('map', {
+    imgHost: 'assets/img/silkroad/minimap/'
+  });
+  
+  map.FlyView(6434, 1044);
+</script>
+```
+
+### TypeScript Support
+
+The package includes TypeScript declarations out of the box:
+
+```typescript
+import { createXSROMap, XSROMapInstance, SROCoord } from 'xsromap';
+
+const map: XSROMapInstance = createXSROMap('map');
+```
+
+### Laravel + Vite Integration
+
+> Complete examples available in [`examples/laravel/`](examples/laravel/)
+
+**1. Install packages**
+
+```bash
+npm install xsromap leaflet
+```
+
+**2. Copy the integration script**
+
+Copy [`examples/laravel/sromap.js`](examples/laravel/sromap.js) to `resources/js/sromap.js`
+
+**3. Import in `resources/js/app.js`**
+
+```javascript
+import './bootstrap';
+import './sromap';
+```
+
+**4. Copy minimap tiles**
+
+```bash
+cp -r /path/to/minimap/tiles storage/app/public/minimap/
+php artisan storage:link
+```
+
+**5. Standard Usage (Global xSROMap)**
+
+```html
+<div id="map" style="height: 500px;"></div>
+
+<script type="module">
+    // Set image host BEFORE init
+    xSROMap.ImageHost = '/storage/minimap';
+    
+    // Initialize the map (Hotan by default)
+    xSROMap.init('map', 114, 47.25);
+    xSROMap.SetZoomLimit(2, 6);
+    
+    // Add markers
+    xSROMap.AddNPC('npc1', '<b>Blacksmith</b>', 6500, 1000);
+    xSROMap.FlyView(6434, 1044); // Navigate to Jangan
+</script>
+```
+
+**6. With Blade Component**
+
+Copy [`examples/laravel/sromap.blade.php`](examples/laravel/sromap.blade.php) to `resources/views/components/sromap.blade.php`
+
+```blade
+{{-- Auto-initialized --}}
+<x-sromap x="6434" y="1044" height="600px" />
+
+{{-- Multiple maps --}}
+<x-sromap id="map-jangan" x="6434" y="1044" />
+<x-sromap id="map-hotan" x="114" y="47.25" />
+
+{{-- With Livewire (wire:ignore is automatic) --}}
+<x-sromap id="livewire-map" :wire="true" />
+```
+
+**7. With Livewire**
+
+See complete example: [`examples/laravel/example-livewire.blade.php`](examples/laravel/example-livewire.blade.php)
+
+```blade
+{{-- The key is wire:ignore to prevent Livewire from touching the map DOM --}}
+<div id="map" data-sromap wire:ignore style="height: 500px;"></div>
+
+@push('scripts')
+<script>
+    Livewire.on('flyToLocation', (data) => {
+        xSROMap.FlyView(data.x, data.y);
+    });
+    
+    Livewire.on('mobSelected', (data) => {
+        xSROMap.ClearDrawingShapes();
+        data.spawns.forEach(spawn => {
+            xSROMap.AddDrawingShape('Marker', [spawn.x, spawn.y, 0, spawn.region]);
+        });
+    });
+</script>
+@endpush
+```
+
+**8. Passing data from Controller**
+
+```php
+// Controller
+public function show() {
+    return view('map', ['npcs' => Npc::all()]);
+}
+```
+
+```blade
+{{-- Blade --}}
+<div id="map" style="height: 100vh;"></div>
+
+<script type="module">
+    xSROMap.ImageHost = '{{ asset("storage/minimap") }}';
+    xSROMap.init('map');
+    
+    @foreach($npcs as $npc)
+        xSROMap.AddNPC('{{ $npc->id }}', '<b>{{ $npc->name }}</b>', {{ $npc->x }}, {{ $npc->y }});
+    @endforeach
+</script>
+```
+
+## Building from Source
+
+```bash
+# Install dependencies
+npm install
+
+# Development server
+npm run dev
+
+# Build library
+npm run build
+```
+
+---
+
 ### Features
 - Navigate through towns, areas, and other popular locations
 - Search filter by locations or NPC's

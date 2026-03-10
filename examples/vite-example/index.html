@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>xSROMap - Vite Example</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    #map {
+      width: 100vw;
+      height: 100vh;
+    }
+    .controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      max-width: 250px;
+    }
+    .controls h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .controls button {
+      display: block;
+      width: 100%;
+      padding: 8px 12px;
+      margin: 5px 0;
+      border: none;
+      background: #4a90d9;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .controls button:hover {
+      background: #357abd;
+    }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <h3>xSROMap Demo</h3>
+    <button onclick="flyToJangan()">Fly to Jangan</button>
+    <button onclick="flyToHotan()">Fly to Hotan</button>
+    <button onclick="flyToSamarkand()">Fly to Samarkand</button>
+    <button onclick="flyToConstantinople()">Fly to Constantinople</button>
+    <button onclick="addRandomPlayer()">Add Random Player</button>
+  </div>
+  <div id="map"></div>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

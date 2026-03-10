@@ -1,0 +1,50 @@
+{
+  "name": "xsromap",
+  "version": "1.4.0",
+  "description": "Silkroad Online interactive map library built on Leaflet",
+  "author": "JellyBitz",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/xsromap.umd.cjs",
+  "module": "./dist/xsromap.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/xsromap.js",
+      "require": "./dist/xsromap.umd.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ahmed-Elrayes/xSROMap.git"
+  },
+  "keywords": [
+    "silkroad",
+    "silkroad-online",
+    "map",
+    "minimap",
+    "leaflet",
+    "game-map"
+  ],
+  "homepage": "https://github.com/Ahmed-Elrayes/xSROMap",
+  "bugs": {
+    "url": "https://github.com/Ahmed-Elrayes/xSROMap/issues"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "peerDependencies": {
+    "leaflet": "^1.7.0"
+  },
+  "devDependencies": {
+    "leaflet": "^1.9.4",
+    "vite": "^5.0.0"
+  }
+}
