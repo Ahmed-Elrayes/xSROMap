@@ -1,0 +1,17 @@
+# Source files (dist is published)
+src/
+examples/
+assets/
+
+# Config files
+vite.config.js
+.gitignore
+.github/
+
+# Documentation (README is included by default)
+index.html
+
+# Development
+node_modules/
+*.log
+.DS_Store
