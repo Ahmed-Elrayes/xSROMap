@@ -1,13 +1,19 @@
 /**
  * Semantic Release Configuration
  * Configured to bump patch version (e.g., 1.4.0 -> 1.4.1)
+ * 
+ * Commit format: type(scope): message
+ * Examples:
+ *   fix: resolve build error
+ *   feat: add new feature
+ *   chore: update dependencies
  */
 module.exports = {
   branches: ['production'],
   plugins: [
     // Analyze commits - treat all commits as patch releases
     ['@semantic-release/commit-analyzer', {
-      preset: 'angular',
+      preset: 'conventionalcommits',
       releaseRules: [
         // All commit types trigger a patch release
         { type: 'feat', release: 'patch' },
@@ -20,16 +26,29 @@ module.exports = {
         { type: 'build', release: 'patch' },
         { type: 'ci', release: 'patch' },
         { type: 'test', release: 'patch' },
+        { type: 'revert', release: 'patch' },
         // Breaking changes still bump major
         { breaking: true, release: 'major' },
       ],
-      parserOpts: {
-        noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES'],
-      },
     }],
     // Generate release notes
     ['@semantic-release/release-notes-generator', {
-      preset: 'angular',
+      preset: 'conventionalcommits',
+      presetConfig: {
+        types: [
+          { type: 'feat', section: 'Features' },
+          { type: 'fix', section: 'Bug Fixes' },
+          { type: 'perf', section: 'Performance' },
+          { type: 'refactor', section: 'Refactoring' },
+          { type: 'docs', section: 'Documentation' },
+          { type: 'chore', section: 'Chores' },
+          { type: 'build', section: 'Build' },
+          { type: 'ci', section: 'CI' },
+          { type: 'style', section: 'Styles' },
+          { type: 'test', section: 'Tests' },
+          { type: 'revert', section: 'Reverts' },
+        ],
+      },
     }],
     // Update CHANGELOG.md
     '@semantic-release/changelog',
