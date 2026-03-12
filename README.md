@@ -20,6 +20,21 @@ npm install xsromap
 <script src="https://unpkg.com/xsromap/dist/xsromap.umd.cjs"></script>
 ```
 
+## Assets (Map Tiles & Fonts)
+
+The npm package includes only the JavaScript library and CSS. **You must host the map tiles and fonts separately.**
+
+### Map Tiles
+Download the minimap tiles and host them on your server or CDN:
+- Source: Extract from Silkroad client or use existing tile sets
+- Configure via `imgHost` option: `createXSROMap('map', { imgHost: '/path/to/tiles/' })`
+
+### Fonts (Font Awesome 5)
+The CSS uses Font Awesome 5 Pro icons. Include it in your project:
+```html
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+```
+
 ## Usage
 
 ### ES6 Module (Vite, Webpack, etc.)
