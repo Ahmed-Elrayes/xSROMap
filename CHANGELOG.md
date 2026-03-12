@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/Ahmed-Elrayes/xSROMap/compare/v1.5.2...v1.5.3) (2026-03-12)
+
+
+### Bug Fixes
+
+* remove large assets ([f05cfab](https://github.com/Ahmed-Elrayes/xSROMap/commit/f05cfab3922f77337cc46e749fd3c1ab6a5165cf))
+
 ## [1.5.2](https://github.com/Ahmed-Elrayes/xSROMap/compare/v1.5.1...v1.5.2) (2026-03-12)
 
 

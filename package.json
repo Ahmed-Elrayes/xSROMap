@@ -1,6 +1,6 @@
 {
   "name": "xsromap",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Silkroad Online interactive map library built on Leaflet",
   "author": "JellyBitz",
   "license": "MIT",
