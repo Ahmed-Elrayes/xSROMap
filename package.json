@@ -10,12 +10,18 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/xsromap.js",
       "require": "./dist/xsromap.umd.cjs",
-      "types": "./dist/index.d.ts"
+      "default": "./dist/xsromap.js"
     },
-    "./style.css": "./dist/style.css"
+    "./style.css": "./dist/style.css",
+    "./assets/*": "./dist/assets/*"
   },
+  "style": "./dist/style.css",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "files": [
     "dist"
   ],
