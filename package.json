@@ -1,18 +1,22 @@
 {
   "name": "xsromap",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Silkroad Online interactive map library built on Leaflet",
   "author": "JellyBitz",
   "license": "MIT",
   "type": "module",
   "main": "./dist/xsromap.umd.cjs",
   "module": "./dist/xsromap.js",
+  "browser": "./dist/xsromap.js",
+  "unpkg": "./dist/xsromap.umd.cjs",
+  "jsdelivr": "./dist/xsromap.umd.cjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/xsromap.js",
       "require": "./dist/xsromap.umd.cjs",
+      "browser": "./dist/xsromap.js",
       "default": "./dist/xsromap.js"
     },
     "./style.css": "./dist/style.css",
