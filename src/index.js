@@ -5,6 +5,9 @@
  * @version 1.4.0
  */
 
+// Auto-import styles
+import '../assets/css/main.css';
+
 import L from 'leaflet';
 
 // Virtual marker performance enhancement
