@@ -13,7 +13,7 @@ module.exports = {
   plugins: [
     // Analyze commits - treat all commits as patch releases
     ['@semantic-release/commit-analyzer', {
-      preset: 'conventionalcommits',
+      preset: 'angular',
       releaseRules: [
         // All commit types trigger a patch release
         { type: 'feat', release: 'patch' },
@@ -30,25 +30,13 @@ module.exports = {
         // Breaking changes still bump major
         { breaking: true, release: 'major' },
       ],
+      parserOpts: {
+        noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES'],
+      },
     }],
     // Generate release notes
     ['@semantic-release/release-notes-generator', {
-      preset: 'conventionalcommits',
-      presetConfig: {
-        types: [
-          { type: 'feat', section: 'Features' },
-          { type: 'fix', section: 'Bug Fixes' },
-          { type: 'perf', section: 'Performance' },
-          { type: 'refactor', section: 'Refactoring' },
-          { type: 'docs', section: 'Documentation' },
-          { type: 'chore', section: 'Chores' },
-          { type: 'build', section: 'Build' },
-          { type: 'ci', section: 'CI' },
-          { type: 'style', section: 'Styles' },
-          { type: 'test', section: 'Tests' },
-          { type: 'revert', section: 'Reverts' },
-        ],
-      },
+      preset: 'angular',
     }],
     // Update CHANGELOG.md
     '@semantic-release/changelog',
